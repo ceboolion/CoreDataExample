@@ -88,6 +88,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate {
+
     
 }
 
@@ -99,11 +100,23 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.identifier, for: indexPath) as! TableCell
         cell.textLabel?.text = data[indexPath.row].title
+        cell.accessoryType = data[indexPath.row].done ? .checkmark : .none
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        context.delete(data[indexPath.row])
+//        data.remove(at: indexPath.row)
+        
+        data[indexPath.row].done = !data[indexPath.row].done
+        
+        saveItems()
+    }
     
-    
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let delete = UITab
+    }
     
 }
